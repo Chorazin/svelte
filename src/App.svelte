@@ -1,10 +1,31 @@
 <script>
-	export let name;
+	let people = [
+		{ name: 'Harry Kane', position: 'striker', age: 26, id: 1 },
+		{ name: 'Dele Alli', position: 'midfielder', age: 24, id: 2 },
+		{ name: 'Son Heung Min', position: 'wide forward', age: 28, id: 3 },
+		{ name: 'Moussa Sissoko', position: 'midfielder', age: 30, id: 4 }
+	]
+
+	const delete_player = (id) => {
+		//delete player clicked
+		console.log(id);
+		return() => {
+			people = people.filter((player) => player.id != id);
+		};
+	};
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>testing update</p>
+	{#each people as player (player.id)}
+		<div>
+			<h4>player: {player.name}</h4>
+			<p>age: {player.age}</p>
+			<p>position: {player.position}</p>
+			<button on:click={delete_player(player.id)}>delete player</button>
+		</div>
+	{:else}
+		<p>There are no players to show</p>
+	{/each}
 </main>
 
 <style>
